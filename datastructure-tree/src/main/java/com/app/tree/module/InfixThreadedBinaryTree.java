@@ -1,6 +1,6 @@
-package com.app.tree.domain;
+package com.app.tree.module;
 
-import com.app.tree.domain.binarytree.ThreadedBinaryTreeNode;
+import com.app.tree.module.binarytree.ThreadedBinaryTreeNode;
 import com.app.tree.helper.ThreadedBinaryTreeHelper;
 
 import java.util.function.Consumer;
@@ -11,7 +11,6 @@ import java.util.function.Consumer;
  * @author yanggy
  */
 public class InfixThreadedBinaryTree <T> {
-
     /**
      * root 节点
      */

@@ -1,13 +1,13 @@
-package com.app.tree.domain;
+package com.app.tree.module;
 
-import com.app.tree.domain.binarytree.BinaryTreeNode;
 import com.app.tree.helper.BinaryTreeHelper;
+import com.app.tree.module.binarytree.BinaryTreeNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * 二叉树实体
@@ -19,7 +19,6 @@ import java.util.function.Consumer;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BinaryTree<T> {
-
     /**
      * 二叉树根节点
      */
@@ -59,29 +58,27 @@ public class BinaryTree<T> {
     }
 
     /**
-     * 前序遍历
+     * 前序查找节点
      *
-     * @param node 待查找节点
-     * @param comparator 比较器
+     * @param predicate 断言
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> preOrderSearch(BinaryTreeNode<T> node, Comparator<BinaryTreeNode<T>> comparator) {
+    public BinaryTreeNode<T> preOrderSearch(Predicate<BinaryTreeNode<T>> predicate) {
         if (root != null) {
-            return BinaryTreeHelper.preOrderSearch(node, root, comparator);
+            BinaryTreeHelper.preOrderSearch(root, predicate);
         }
         return null;
     }
 
     /**
-     * 中序遍历
+     * 中序遍历查找节点
      *
-     * @param node 待查找节点
-     * @param comparator 比较器
+     * @param predicate 断言
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> infixOrderSearch(BinaryTreeNode<T> node, Comparator<BinaryTreeNode<T>> comparator) {
+    public BinaryTreeNode<T> infixOrderSearch(Predicate<BinaryTreeNode<T>> predicate) {
         if (root != null) {
-            return BinaryTreeHelper.infixOrderSearch(node, root, comparator);
+            return BinaryTreeHelper.infixOrderSearch(root, predicate);
         }
         return null;
     }
@@ -89,13 +86,12 @@ public class BinaryTree<T> {
     /**
      * 后序遍历
      *
-     * @param node 待查找节点
-     * @param comparator 比较器
+     * @param predicate 断言
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> postOrderSearch(BinaryTreeNode<T> node, Comparator<BinaryTreeNode<T>> comparator) {
+    public BinaryTreeNode<T> postOrderSearch(Predicate<BinaryTreeNode<T>> predicate) {
         if (root != null) {
-            return BinaryTreeHelper.postOrderSearch(node, root, comparator);
+            return BinaryTreeHelper.postOrderSearch(root, predicate);
         }
         return null;
     }
@@ -103,17 +99,16 @@ public class BinaryTree<T> {
     /**
      * 删除节点及其子树
      *
-     * @param node 待删除节点
-     * @param comparator 比较器
+     * @param predicate 比较器
      */
-    public void deleteNode(BinaryTreeNode<T> node, Comparator<BinaryTreeNode<T>> comparator) {
+    public void deleteNode(Predicate<BinaryTreeNode<T>> predicate) {
         if (root == null) {
             return;
         }
-        if (BinaryTreeHelper.isEquals(node, root, comparator)) {
+        if (predicate.test(root)) {
             root = null;
             return;
         }
-        BinaryTreeHelper.deleteNode(node, root, comparator);
+        BinaryTreeHelper.deleteNode(root, predicate);
     }
 }

@@ -1,8 +1,8 @@
 package com.app.tree.test;
 
-import com.app.tree.domain.ArrayBinaryTree;
-import com.app.tree.domain.BinaryTree;
-import com.app.tree.domain.binarytree.BinaryTreeNode;
+import com.app.tree.module.ArrayBinaryTree;
+import com.app.tree.module.BinaryTree;
+import com.app.tree.module.binarytree.BinaryTreeNode;
 import com.app.tree.dto.Hero;
 import org.junit.Test;
 
@@ -95,11 +95,12 @@ public class BinaryTreeTest {
     @Test
     public void testXxxOrderSearch() {
         BinaryTree<Hero> binaryTree = newBinaryTree();
-        BinaryTreeNode<Hero> nodeX = new BinaryTreeNode<>(null, null, new Hero(-1, ""));
+        BinaryTreeNode<Hero> nodeX = new BinaryTreeNode<>( new Hero(1, ""));
 //        BinaryTreeNode<Hero> node = binaryTree.postOrderSearch(nodeX, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
 //        BinaryTreeNode<Hero> node = binaryTree.infixOrderSearch(nodeX, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
 //        BinaryTreeNode<Hero> node = binaryTree.postOrderSearch(nodeX, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
-        BinaryTreeNode<Hero> node = binaryTree.postOrderSearch(nodeX, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
+//        BinaryTreeNode<Hero> node = binaryTree.postOrderSearch(, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
+        BinaryTreeNode<Hero> node = binaryTree.postOrderSearch(node1 -> node1.getData().getNo() == nodeX.getData().getNo());
         System.out.println(node);
     }
 
@@ -107,8 +108,7 @@ public class BinaryTreeTest {
     public void testDeleteNode() {
         BinaryTree<Hero> binaryTree = newBinaryTree();
         BinaryTreeNode<Hero> nodeX =
-            new BinaryTreeNode<>(null, null, new Hero(3, ""));
-        binaryTree.deleteNode(nodeX, (v1, v2) -> v1.getData().getNo() == v2.getData().getNo() ? 0 : -1);
+            new BinaryTreeNode<>(new Hero(3, ""));
         binaryTree.preOrder(heroBinaryTreeNode -> System.out.println(heroBinaryTreeNode.toString()));
     }
 

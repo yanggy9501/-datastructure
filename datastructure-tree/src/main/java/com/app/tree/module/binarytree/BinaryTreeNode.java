@@ -1,6 +1,5 @@
-package com.app.tree.domain.binarytree;
+package com.app.tree.module.binarytree;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +9,13 @@ import lombok.NoArgsConstructor;
  * @author yanggy
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class  BinaryTreeNode <T> {
+    /**
+     * 数据域
+     */
+    private T data;
+
     /**
      * 左子节点
      */
@@ -23,10 +26,9 @@ public class  BinaryTreeNode <T> {
      */
     private BinaryTreeNode<T> rightNode;
 
-    /**
-     * 数据域
-     */
-    private T data;
+    public BinaryTreeNode(T data) {
+        this.data = data;
+    }
 
     @Override
     public String toString() {

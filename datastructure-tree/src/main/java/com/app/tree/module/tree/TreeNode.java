@@ -1,4 +1,4 @@
-package com.app.tree.domain.tree;
+package com.app.tree.module.tree;
 
 import lombok.Data;
 
@@ -11,11 +11,6 @@ import java.util.List;
  */
 @Data
 public class TreeNode<T>{
-    /**
-     * 排序字段
-     */
-    private int sortOrder = 0;
-
     /**
      * 节点数据属性
      */

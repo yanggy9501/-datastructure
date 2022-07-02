@@ -1,4 +1,4 @@
-package com.app.tree.domain.binarytree;
+package com.app.tree.module.binarytree;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +13,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ThreadedBinaryTreeNode<T> {
+    /**
+     * 数据域
+     */
+    private T data;
+
     /**
      * 左子节点
      */
@@ -33,11 +38,6 @@ public class ThreadedBinaryTreeNode<T> {
      */
     private PointType rightType = PointType.CHILDREN_POINT;
 
-    /**
-     * 数据域
-     */
-    private T data;
-
     @Override
     public String toString() {
         return "ThreadedBinaryTreeNode{" +
@@ -47,7 +47,7 @@ public class ThreadedBinaryTreeNode<T> {
             '}';
     }
 
-    public static enum PointType {
+    public enum PointType {
         /**
          * 孩子节点 point
          */

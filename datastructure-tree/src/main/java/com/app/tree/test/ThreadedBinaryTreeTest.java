@@ -1,6 +1,6 @@
 package com.app.tree.test;
 
-import com.app.tree.domain.binarytree.ThreadedBinaryTreeNode;
+import com.app.tree.module.binarytree.ThreadedBinaryTreeNode;
 import com.app.tree.dto.Hero;
 import com.app.tree.helper.ThreadedBinaryTreeHelper;
 import org.junit.Test;
@@ -53,7 +53,7 @@ public class ThreadedBinaryTreeTest {
     @Test
     public void testInfixThreadedBinaryTree() {
         ThreadedBinaryTreeNode<Hero> root = newThreadedBinaryTreeNode();
-        ThreadedBinaryTreeHelper.infixOrderThread(null, root);
+        ThreadedBinaryTreeHelper.infixOrderThread(root);
         ThreadedBinaryTreeHelper.infixOrder(root, System.out::println);
     }
 }

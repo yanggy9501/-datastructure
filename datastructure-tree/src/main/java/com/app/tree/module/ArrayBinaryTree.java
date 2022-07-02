@@ -1,4 +1,4 @@
-package com.app.tree.domain;
+package com.app.tree.module;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 
 /**
  * 顺序存储的二叉树
- * 一般存储完成二叉树，存储下标从 1 开始。
  *
  * @author yanggy
  */
@@ -18,12 +17,14 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 public class ArrayBinaryTree <T> {
     /**
-     * 存储数组，从下标 1 开始存储
+     * 存储数组，从下标 0 开始存储
      */
     private ArrayList<T> data;
 
     /**
      * 前序遍历二叉树或二叉树的子树
+     * (root + 1) * 2 = left + 1 ==> left = 2 * root +1
+     * (root + 1) * 2 + 1 = right + 1 ==> right = 2 * root + 2
      *
      * @param root 二叉树或子树的根
      * @param consumer 消费者
@@ -34,11 +35,12 @@ public class ArrayBinaryTree <T> {
         }
         // visit node
         consumer.accept(data.get(root));
-        if ((root << 1) < data.size()) {
+        // go left
+        if ((root << 1) + 1 < data.size()) {
             preOrder(root << 1, consumer);
         }
-
-        if (((root << 1) + 1) < data.size()) {
+        // go right
+        if ((root << 1) + 2 < data.size()) {
             preOrder((root << 1) + 1, consumer);
         }
     }
@@ -49,7 +51,7 @@ public class ArrayBinaryTree <T> {
      * @param consumer 消费者
      */
     public void preOrder(Consumer<T> consumer) {
-        preOrder(1, consumer);
+        preOrder(0, consumer);
     }
 
     /**
@@ -62,13 +64,14 @@ public class ArrayBinaryTree <T> {
         if (data == null || data.isEmpty()) {
             return;
         }
-
-        if ((root << 1) < data.size()) {
+        // go left
+        if ((root << 1) + 1 < data.size()) {
             preOrder(root << 1, consumer);
         }
         // visit node
         consumer.accept(data.get(root));
-        if (((root << 1) + 1) < data.size()) {
+        // go right
+        if ((root << 1) + 2 < data.size()) {
             preOrder((root << 1) + 1, consumer);
         }
     }
@@ -79,7 +82,7 @@ public class ArrayBinaryTree <T> {
      * @param consumer 消费者
      */
     public void infixOrder(Consumer<T> consumer) {
-        infixOrder(1, consumer);
+        infixOrder(0, consumer);
     }
 
     /**
@@ -92,11 +95,12 @@ public class ArrayBinaryTree <T> {
         if (data == null || data.isEmpty()) {
             return;
         }
-
-        if ((root << 1) < data.size()) {
+        // go left
+        if ((root << 1) + 1 < data.size()) {
             preOrder(root << 1, consumer);
         }
-        if (((root << 1) + 1) < data.size()) {
+        // go right
+        if (((root << 1) + 2) < data.size()) {
             preOrder((root << 1) + 1, consumer);
         }
         // visit node
@@ -109,6 +113,6 @@ public class ArrayBinaryTree <T> {
      * @param consumer 消费者
      */
     public void postOrder(Consumer<T> consumer) {
-        postOrder(1, consumer);
+        postOrder(0, consumer);
     }
 }
