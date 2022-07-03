@@ -1,14 +1,13 @@
-package com.app.tree.utils;
+package com.app.tools.datamoudle.utils;
 
 import java.util.Comparator;
 
 /**
- * 排序工具类
+ * 堆排序工具类
  *
  * @author yanggy
  */
-public class SortUtil {
-
+public class HeapSortUtil {
     /**
      * 堆排序 array
      *
@@ -23,7 +22,7 @@ public class SortUtil {
         buildMaxHeap(array, comparator);
         // 排序，每次堆顶与最后一位待排位置进行交换
         for (int i = array.length - 1; i > 0; i--) {
-            swap(array, 0, i);
+            swap(array, i);
             adjustHeap(array, 0, i, comparator);
         }
     }
@@ -72,16 +71,15 @@ public class SortUtil {
     }
 
     /**
-     * 交换数组两个下标位置
+     * 交换数组0，index位置的元素
      *
-     * @param array 数组
-     * @param index1 数组下标
-     * @param index2 数组下标
      * @param <T> 泛型
+     * @param array 数组
+     * @param index 数组下标
      */
-    private static <T> void swap(T[] array, int index1, int index2) {
-        T temp = array[index1];
-        array[index1] = array[index2];
-        array[index2] = temp;
+    private static <T> void swap(T[] array, int index) {
+        T temp = array[0];
+        array[0] = array[index];
+        array[index] = temp;
     }
 }

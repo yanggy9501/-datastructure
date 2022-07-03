@@ -1,9 +1,9 @@
-package com.app.tree.test;
+package com.app.tools.datamoudle.test;
 
-import com.app.tree.module.ArrayBinaryTree;
-import com.app.tree.module.BinaryTree;
-import com.app.tree.module.binarytree.BinaryTreeNode;
-import com.app.tree.dto.Hero;
+import com.app.tools.datamoudle.dto.Hero;
+import com.app.tools.datamoudle.module.BinaryTree;
+import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
+import com.app.tools.datamoudle.module.ArrayBinaryTree;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class BinaryTreeTest {
                      4    5
      */
 
-    private static BinaryTree<Hero>  newBinaryTree() {
+    private static BinaryTree<Hero> newBinaryTree() {
         // 创建节点
         Hero hero1 = new Hero(1, "宋将");
         Hero hero2 = new Hero(2, "吴用");

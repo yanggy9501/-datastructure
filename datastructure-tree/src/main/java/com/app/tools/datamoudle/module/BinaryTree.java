@@ -1,7 +1,7 @@
-package com.app.tree.module;
+package com.app.tools.datamoudle.module;
 
-import com.app.tree.helper.BinaryTreeHelper;
-import com.app.tree.module.binarytree.BinaryTreeNode;
+import com.app.tools.datamoudle.helper.BinaryTreeHelper;
+import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -110,5 +110,14 @@ public class BinaryTree<T> {
             return;
         }
         BinaryTreeHelper.deleteNode(root, predicate);
+    }
+
+    /**
+     * 获取树的高度
+     *
+     * @return tree height
+     */
+    public int getHeight() {
+        return BinaryTreeHelper.getHeight(root);
     }
 }

@@ -1,8 +1,8 @@
-package com.app.tree.test;
+package com.app.tools.datamoudle.test;
 
-import com.app.tree.module.binarytree.ThreadedBinaryTreeNode;
-import com.app.tree.dto.Hero;
-import com.app.tree.helper.ThreadedBinaryTreeHelper;
+import com.app.tools.datamoudle.module.binarytree.ThreadedBinaryTreeNode;
+import com.app.tools.datamoudle.dto.Hero;
+import com.app.tools.datamoudle.helper.ThreadedBinaryTreeHelper;
 import org.junit.Test;
 
 /**

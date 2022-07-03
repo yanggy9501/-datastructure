@@ -1,6 +1,6 @@
-package com.app.tree.helper;
+package com.app.tools.datamoudle.helper;
 
-import com.app.tree.module.binarytree.ThreadedBinaryTreeNode;
+import com.app.tools.datamoudle.module.binarytree.ThreadedBinaryTreeNode;
 
 import java.util.function.Consumer;
 

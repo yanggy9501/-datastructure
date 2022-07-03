@@ -1,4 +1,4 @@
-package com.app.tree.module.binarytree;
+package com.app.tools.datamoudle.module.binarytree;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

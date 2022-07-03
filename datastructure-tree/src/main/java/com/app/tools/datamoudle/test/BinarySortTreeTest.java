@@ -1,6 +1,6 @@
-package com.app.tree.test;
+package com.app.tools.datamoudle.test;
 
-import com.app.tree.module.BinarySortTree;
+import com.app.tools.datamoudle.module.BinarySortTree;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -61,6 +61,19 @@ public class BinarySortTreeTest {
     public void testDeleteDoubleBranchNode() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
         binarySortTree.deleteSortedTreeNode(5, Integer::compareTo);
+        binarySortTree.infixOrder(System.out::println);
+    }
+
+    @Test
+    public void testDeleteDNode() {
+        BinarySortTree<Integer> binarySortTree = createBinarySortTree();
+        binarySortTree.deleteSortedTreeNode(5, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(-5, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(3, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(4, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(10, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(11, Integer::compareTo);
+        binarySortTree.deleteSortedTreeNode(1, Integer::compareTo);
         binarySortTree.infixOrder(System.out::println);
     }
 }

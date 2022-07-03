@@ -1,7 +1,7 @@
-package com.app.tree.module;
+package com.app.tools.datamoudle.module;
 
-import com.app.tree.helper.BinaryTreeHelper;
-import com.app.tree.module.binarytree.BinaryTreeNode;
+import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
+import com.app.tools.datamoudle.helper.BinaryTreeHelper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -36,7 +36,7 @@ public class BinarySortTree<T> extends BinaryTree<T> {
            currentNode = comparator.compare(data, currentNode.getData()) <= 0 ?
                currentNode.getLeftNode() : currentNode.getRightNode();
        }
-       // 挂载node到叶子节点
+       // 添加node到叶子节点
        if (comparator.compare(data, preNode.getData()) <= 0) {
            preNode.setLeftNode(node);
        } else {
@@ -85,7 +85,7 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * @param parentNode targetNode的父节点
      */
    private void deleteLeafNode(BinaryTreeNode<T> targetNode, BinaryTreeNode<T> parentNode) {
-       // parentNode == null 的节点是root.
+       // root.parent == parentNode == null 的处理（parentNode == null，则targetNode是root节点）.
        if (parentNode == null) {
            // delete root
            setRoot(null);
@@ -106,6 +106,15 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * @param parentNode targetNode的父节点
      */
    private void deleteSingleBranchNode(BinaryTreeNode<T> singleBranchNode, BinaryTreeNode<T> parentNode) {
+        // root.parent == parentNode == null 的处理（parentNode == null，则targetNode是root节点）.
+       if (parentNode == null) {
+           if (singleBranchNode.getLeftNode() != null) {
+               setRoot(singleBranchNode.getLeftNode());
+           } else {
+               setRoot(singleBranchNode.getRightNode());
+           }
+           return;
+       }
        // 判断targetNode 是parentNode左节点还是右节点
        if (parentNode.getLeftNode() == singleBranchNode) {
            // 判断targetNode的分支是左还是右

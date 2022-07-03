@@ -1,8 +1,10 @@
-package com.app.tree.helper;
+package com.app.tools.datamoudle.helper;
 
-import com.app.tree.module.BinaryTree;
-import com.app.tree.module.binarytree.BinaryTreeNode;
+import com.app.tools.datamoudle.module.BinaryTree;
+import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -272,5 +274,70 @@ public class BinaryTreeHelper {
      */
     public static <T> boolean hasTwoBranch(BinaryTreeNode<T> node) {
         return node != null && node.getLeftNode() != null && node.getRightNode() != null;
+    }
+
+    /**
+     * 获取二叉树中的BinaryTreeNode节点的高度
+     * 二叉树节点的高度：指从该节点到叶子节点的最长简单路径边的条数
+     * 实现：node的高度 = Max(左子树高度, 右子树高度) + 1
+     *
+     * @param node 二叉树中的BinaryTreeNode节点
+     * @return height
+     */
+    public static <T> int getHeight(BinaryTreeNode<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return Math.max(getHeight(node.getLeftNode()) + 1, getHeight(node.getRightNode()) + 1);
+    }
+
+    /**
+     * 获取二叉树的高度
+     *
+     * @param binaryTree 二叉树
+     * @return height
+     */
+    public static <T> int getHeight(BinaryTree<T> binaryTree) {
+        return getHeight(binaryTree.getRoot());
+    }
+
+    /**
+     * 获取node 节点的访问路径，从根出发到node包括node节点
+     *
+     * @param node 二叉树节点
+     * @return 访问路径
+     */
+    public static <T> List<BinaryTreeNode<T>> getVisitPath(BinaryTreeNode<T> node, BinaryTreeNode<T> root,
+        Comparator<T> comparator) {
+
+        return null;
+    }
+
+    /**
+     * 判断 node节点为子树的root的子树否是平衡的
+     *
+     * @param node 二叉树节点
+     * @return boolean，true为平衡子树
+     */
+    public static <T> boolean isBalance(BinaryTreeNode<T> node) {
+        if (node == null) {
+            return true;
+        }
+        // 判断孩子节点是否平衡，否则返回false，是还要判断当前节点是否平衡
+        if (!isBalance(node.getLeftNode()) || !isBalance(node.getRightNode())) {
+            return false;
+        }
+        // 判断节点是否是平衡的
+        return Math.abs(getHeight(node.getLeftNode()) - getHeight(node.getRightNode())) < 2;
+    }
+
+    /**
+     * 判断二叉树否是平衡
+     *
+     * @param binaryTree 二叉树
+     * @return boolean，true为平衡子树
+     */
+    public static <T> boolean isBalance(BinaryTree<T> binaryTree) {
+        return isBalance(binaryTree.getRoot());
     }
 }
