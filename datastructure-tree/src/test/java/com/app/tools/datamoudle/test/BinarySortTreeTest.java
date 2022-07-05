@@ -21,7 +21,7 @@ public class BinarySortTreeTest {
 
     private BinarySortTree<Integer> createBinarySortTree() {
         BinarySortTree<Integer> binarySortTree = new BinarySortTree<>();
-        Comparator<Integer> comparator = (o1, o2) -> Integer.compare(o1, o2);
+        Comparator<Integer> comparator = Integer::compare;
         binarySortTree.add(5, comparator);
         binarySortTree.add(1, comparator);
         binarySortTree.add(3, comparator);

@@ -107,8 +107,6 @@ public class BinaryTreeTest {
     @Test
     public void testDeleteNode() {
         BinaryTree<Hero> binaryTree = newBinaryTree();
-        BinaryTreeNode<Hero> nodeX =
-            new BinaryTreeNode<>(new Hero(3, ""));
         binaryTree.preOrder(heroBinaryTreeNode -> System.out.println(heroBinaryTreeNode.toString()));
     }
 
