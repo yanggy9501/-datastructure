@@ -1,4 +1,4 @@
-package com.app.tools.datamoudle.test;
+package com.app.tools.datamoudle.test.tree;
 
 import com.app.tools.datamoudle.dto.Hero;
 import com.app.tools.datamoudle.module.BinaryTree;

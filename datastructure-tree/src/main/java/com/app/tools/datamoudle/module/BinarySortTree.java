@@ -2,6 +2,8 @@ package com.app.tools.datamoudle.module;
 
 import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
 import com.app.tools.datamoudle.helper.BinaryTreeHelper;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,14 +14,29 @@ import java.util.function.Predicate;
  *
  * @author yanggy
  */
+@Getter
+@Setter
 public class BinarySortTree<T> extends BinaryTree<T> {
+    /**
+     * 比较器
+     */
+    private Comparator<T> comparator;
+
+    public BinarySortTree(Comparator<T> comparator) {
+        this.comparator = comparator;
+    }
+
+    public BinarySortTree(BinaryTreeNode<T> root, Comparator<T> comparator) {
+        super(root);
+        this.comparator = comparator;
+    }
+
     /**
      * 添加节点二叉排序数中
      *
      * @param data 数据
-     * @param comparator 比较器
      */
-   public void add(T data, Comparator<T> comparator) {
+   public void add(T data) {
        BinaryTreeNode<T> node = new BinaryTreeNode<>(data);
        // 遍历指针
        BinaryTreeNode<T> currentNode = getRoot();
@@ -49,10 +66,9 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * 添加节点二叉排序数中
      *
      * @param dataList 数据集合
-     * @param comparator 比较器
      */
-   public void add(List<T> dataList, Comparator<T> comparator) {
-       dataList.forEach(data -> add(data, comparator));
+   public void add(List<T> dataList) {
+       dataList.forEach(this::add);
    }
 
     /**
@@ -60,12 +76,12 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      *
      * @param targetValue 待删除节点值
      */
-   public void deleteSortedTreeNode(T targetValue, Comparator<T> comparator) {
-       BinaryTreeNode<T> targetNode = search(targetValue, comparator);
+   public void deleteSortedTreeNode(T targetValue) {
+       BinaryTreeNode<T> targetNode = search(targetValue);
        if (targetNode == null) {
            return;
        }
-       BinaryTreeNode<T> parentNode = searchParentNode(targetNode, comparator);
+       BinaryTreeNode<T> parentNode = searchParentNode(targetNode);
        if (BinaryTreeHelper.isLeafNode(targetNode)) {
             // 若targetNode 是叶子节点
            deleteLeafNode(targetNode, parentNode);
@@ -185,10 +201,9 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * 查找符合条件value 的节点
      *
      * @param targetValue 条件值
-     * @param comparator 比较器
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> search(T targetValue, Comparator<T> comparator) {
+    public BinaryTreeNode<T> search(T targetValue) {
         BinaryTreeNode<T> node = getRoot();
         while (node != null) {
             // equals
@@ -206,10 +221,9 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * 查找 targetNode 节点的父节点
      *
      * @param targetNode targetNode必须尾BinarySortTree中的节点
-     * @param comparator 比较器
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> searchParentNode(BinaryTreeNode<T> targetNode, Comparator<T> comparator) {
+    public BinaryTreeNode<T> searchParentNode(BinaryTreeNode<T> targetNode) {
         if (targetNode == null) {
             return null;
         }
@@ -230,10 +244,9 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * 查找 targetValue == node.getData 节点的父节点
      *
      * @param targetValue 目标节点的值
-     * @param comparator 比较器
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> searchParentNode(T targetValue, Comparator<T> comparator) {
+    public BinaryTreeNode<T> searchParentNode(T targetValue) {
         if (targetValue == null) {
             return null;
         }

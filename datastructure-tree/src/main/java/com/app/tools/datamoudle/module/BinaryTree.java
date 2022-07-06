@@ -2,9 +2,7 @@ package com.app.tools.datamoudle.module;
 
 import com.app.tools.datamoudle.helper.BinaryTreeHelper;
 import com.app.tools.datamoudle.module.binarytree.BinaryTreeNode;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -15,7 +13,8 @@ import java.util.function.Predicate;
  *
  * @author yanggy
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BinaryTree<T> {

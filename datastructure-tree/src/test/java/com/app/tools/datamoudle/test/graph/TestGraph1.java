@@ -38,4 +38,10 @@ public class TestGraph1 {
         Graph<String> graph = createGraph();
         graph.dfsVisit(4, System.out::println);
     }
+
+    @Test
+    public void testBfs() {
+        Graph<String> graph = createGraph();
+        graph.bfsVisit(4, System.out::println);
+    }
 }

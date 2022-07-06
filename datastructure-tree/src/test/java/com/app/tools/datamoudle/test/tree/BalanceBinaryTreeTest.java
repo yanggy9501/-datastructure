@@ -1,4 +1,4 @@
-package com.app.tools.datamoudle.test;
+package com.app.tools.datamoudle.test.tree;
 
 import com.app.tools.datamoudle.helper.BinaryTreeHelper;
 import com.app.tools.datamoudle.module.BalancedBinaryTree;
@@ -23,16 +23,15 @@ public class BalanceBinaryTreeTest {
      */
 
     private BalancedBinaryTree<Integer> createBalancedBinarySortTree() {
-        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>();
-        Comparator<Integer> comparator = Integer::compare;
-        balancedBinaryTree.add(6, comparator);
-        balancedBinaryTree.add(1, comparator);
-        balancedBinaryTree.add(3, comparator);
-        balancedBinaryTree.add(10, comparator);
-        balancedBinaryTree.add(-5, comparator);
-        balancedBinaryTree.add(4, comparator);
-        balancedBinaryTree.add(9, comparator);
-        balancedBinaryTree.add(11, comparator);
+        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>(Integer::compare);
+        balancedBinaryTree.add(6);
+        balancedBinaryTree.add(1);
+        balancedBinaryTree.add(3);
+        balancedBinaryTree.add(10);
+        balancedBinaryTree.add(-5);
+        balancedBinaryTree.add(4);
+        balancedBinaryTree.add(9);
+        balancedBinaryTree.add(11);
 
         return balancedBinaryTree;
     }
@@ -48,19 +47,18 @@ public class BalanceBinaryTreeTest {
      */
 
     private BinarySortTree<Integer> createBinarySortTree() {
-        BinarySortTree<Integer> binarySortTree = new BinarySortTree<>();
-        Comparator<Integer> comparator = Integer::compare;
-        binarySortTree.add(6, comparator);
-        binarySortTree.add(1, comparator);
-        binarySortTree.add(3, comparator);
-        binarySortTree.add(10, comparator);
-        binarySortTree.add(-5, comparator);
-        binarySortTree.add(4, comparator);
-        binarySortTree.add(9, comparator);
-        binarySortTree.add(11, comparator);
+        BinarySortTree<Integer> binarySortTree = new BinarySortTree<>(Integer::compare);
+        binarySortTree.add(6);
+        binarySortTree.add(1);
+        binarySortTree.add(3);
+        binarySortTree.add(10);
+        binarySortTree.add(-5);
+        binarySortTree.add(4);
+        binarySortTree.add(9);
+        binarySortTree.add(11);
 
-        binarySortTree.add(5, comparator);
-        binarySortTree.add(12, comparator);
+        binarySortTree.add(5);
+        binarySortTree.add(12);
 
         return binarySortTree;
     }
@@ -68,7 +66,7 @@ public class BalanceBinaryTreeTest {
     @Test
     public void testCreatBinarySortTree() {
         BalancedBinaryTree<Integer> balancedBinaryTree = createBalancedBinarySortTree();
-        BinaryTreeNode<Integer> node = balancedBinaryTree.search(1, Integer::compare);
+        BinaryTreeNode<Integer> node = balancedBinaryTree.search(1);
         int treeHeight = BinaryTreeHelper.getHeight(node);
         System.out.println(treeHeight);
     }
@@ -76,7 +74,7 @@ public class BalanceBinaryTreeTest {
     @Test
     public void testBalanced() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
-        BinaryTreeNode<Integer> node = binarySortTree.search(111, Integer::compare);
+        BinaryTreeNode<Integer> node = binarySortTree.search(111);
         System.out.println(BinaryTreeHelper.isBalance(node));
     }
     
@@ -90,13 +88,12 @@ public class BalanceBinaryTreeTest {
      */
 
     private BalancedBinaryTree<Integer> createLeftRotateBalancedBinaryTree() {
-        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>();
-        Comparator<Integer> comparator = Integer::compare;
-        balancedBinaryTree.add(6, comparator);
-        balancedBinaryTree.add(10, comparator);
-        balancedBinaryTree.add(11, comparator);
-        balancedBinaryTree.add(12, comparator);
-        balancedBinaryTree.add(13, comparator);
+        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>(Integer::compare);
+        balancedBinaryTree.add(6);
+        balancedBinaryTree.add(10);
+        balancedBinaryTree.add(11);
+        balancedBinaryTree.add(12);
+        balancedBinaryTree.add(13);
         return balancedBinaryTree;
     }
     
@@ -116,14 +113,13 @@ public class BalanceBinaryTreeTest {
      */
 
     private BalancedBinaryTree<Integer> createRightRotateBalancedBinaryTree() {
-        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>();
-        Comparator<Integer> comparator = Integer::compare;
-        balancedBinaryTree.add(6, comparator);
-        balancedBinaryTree.add(5, comparator);
-        balancedBinaryTree.add(4, comparator);
+        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>(Integer::compare);
+        balancedBinaryTree.add(6);
+        balancedBinaryTree.add(5);
+        balancedBinaryTree.add(4);
 
-        balancedBinaryTree.add(3, comparator);
-        balancedBinaryTree.add(2, comparator);
+        balancedBinaryTree.add(3);
+        balancedBinaryTree.add(2);
         return balancedBinaryTree;
     }
 
@@ -144,17 +140,16 @@ public class BalanceBinaryTreeTest {
      */
 
     private BalancedBinaryTree<Integer> createBalancedBinaryTree() {
-        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>();
-        Comparator<Integer> comparator = Integer::compare;
-        balancedBinaryTree.add(20, comparator);
-        balancedBinaryTree.add(10, comparator);
-        balancedBinaryTree.add(5, comparator);
+        BalancedBinaryTree<Integer> balancedBinaryTree = new BalancedBinaryTree<>(Integer::compare);
+        balancedBinaryTree.add(20);
+        balancedBinaryTree.add(10);
+        balancedBinaryTree.add(5);
 
-        balancedBinaryTree.add(8, comparator);
-        balancedBinaryTree.add(-5, comparator);
+        balancedBinaryTree.add(8);
+        balancedBinaryTree.add(-5);
 
-        balancedBinaryTree.add(9, comparator);
-        balancedBinaryTree.add(30, comparator);
+        balancedBinaryTree.add(9);
+        balancedBinaryTree.add(30);
 
 
         return balancedBinaryTree;

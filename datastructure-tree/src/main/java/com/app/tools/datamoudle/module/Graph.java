@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.function.Consumer;
 
 /**
@@ -138,6 +139,62 @@ public class Graph <T> {
                 doDfsVisit(neighborVertex, visited, consumer);
             }
             neighborVertex = getNextNeighbor(vertex, neighborVertex);
+        }
+    }
+
+    /**
+     * 广度度优先访问所有顶点，默认从0号顶点开始访问
+     *
+     * @param consumer 顶点的消费者
+     */
+    public void bfsVisit(Consumer<T> consumer) {
+        bfsVisit(0, consumer);
+    }
+
+    /**
+     * 从指定起始顶点广度优先访问所有顶点
+     *
+     * @param root 访问起始顶点
+     * @param consumer 顶点的消费者
+     */
+    public void bfsVisit(int root, Consumer<T> consumer) {
+        boolean[] visited = new boolean[getVertexNumber()];
+        doBfsVisit(root, visited, consumer);
+        for (int i = 0; i < getVertexNumber(); i++) {
+            if (!visited[i]) {
+                doBfsVisit(i, visited, consumer);
+            }
+        }
+    }
+
+    /**
+     * bfs 广度优先算法实现
+     * 实现：顶点v访问并入队，出队时访问所有v相邻的顶点并入队。访问完顶点v的所有相邻节点，依次重复该操作。
+     *
+     * @param root 当前要访问的顶点下标
+     * @param visited 访问标记数组
+     * @param consumer 顶点的消费者
+     */
+    private void doBfsVisit(int root, boolean[] visited, Consumer<T> consumer) {
+        LinkedList<Integer> queue = new LinkedList<>();
+        // visit vertex
+        consumer.accept(vertexes.get(root));
+        visited[root] = true;
+        queue.addLast(root);
+        // v 队头节点下标，n 相邻节点下标
+        int v, n;
+        while (!queue.isEmpty()) {
+            // 遍历所有与 v 相邻的顶点
+            v = queue.removeFirst();
+            n = getFirstNeighbor(v);
+            while (n != -1) {
+                if (!visited[n]) {
+                    consumer.accept(vertexes.get(n));
+                    visited[n] = true;
+                    queue.addLast(n);
+                }
+                n = getNextNeighbor(v, n);
+            }
         }
     }
 
