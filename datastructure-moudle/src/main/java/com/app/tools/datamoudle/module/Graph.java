@@ -1,10 +1,11 @@
 package com.app.tools.datamoudle.module;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -12,25 +13,25 @@ import java.util.function.Consumer;
  *
  * @author yanggy
  */
-@Data
+@Getter
 public class Graph <T> {
     /**
      * 顶点集
      */
-    private ArrayList<T> vertexes;
+    private final List<T> vertexes;
 
     /**
      * 边集
      */
-    private int[][] edges;
+    private final int[][] edges;
 
     /**
      * 边的总数
      */
-    private int edgeNumber;
+    private int edgeTotal;
 
-    public Graph(int vertexNumber) {
-        edges = new int[vertexNumber][vertexNumber];
+    public Graph(int vertexTotal) {
+        edges = new int[vertexTotal][vertexTotal];
         vertexes = new ArrayList<>();
     }
 
@@ -53,15 +54,30 @@ public class Graph <T> {
     public void addEdge(int vertex1, int vertex2, int weight) {
         edges[vertex1][vertex2] = weight;
         edges[vertex2][vertex1] = weight;
-        edgeNumber++;
+        edgeTotal++;
     }
+
+    /**
+     * 移除边
+     *
+     * @param vertex1 顶点1所在数组下标
+     * @param vertex2 顶点2所在数组下标
+     */
+    public void removeEdge(int vertex1, int vertex2) {
+        edges[vertex1][vertex2] = 0;
+        edges[vertex2][vertex1] = 0;
+        edgeTotal++;
+    }
+
+
+
 
     /**
      * 获取顶点总数
      *
      * @return 顶点总数
      */
-    public int getVertexNumber() {
+    public int getVertexTotal() {
         return vertexes.size();
     }
 
@@ -111,9 +127,9 @@ public class Graph <T> {
      * @param consumer 顶点的消费者
      */
     public void dfsVisit(int index, Consumer<T> consumer) {
-        boolean[] visited = new boolean[getVertexNumber()];
+        boolean[] visited = new boolean[getVertexTotal()];
         doDfsVisit(index, visited, consumer);
-        for (int i = 0; i < getVertexNumber(); i++) {
+        for (int i = 0; i < getVertexTotal(); i++) {
             if (!visited[i]) {
                 doDfsVisit(i, visited, consumer);
             }
@@ -158,9 +174,9 @@ public class Graph <T> {
      * @param consumer 顶点的消费者
      */
     public void bfsVisit(int root, Consumer<T> consumer) {
-        boolean[] visited = new boolean[getVertexNumber()];
+        boolean[] visited = new boolean[getVertexTotal()];
         doBfsVisit(root, visited, consumer);
-        for (int i = 0; i < getVertexNumber(); i++) {
+        for (int i = 0; i < getVertexTotal(); i++) {
             if (!visited[i]) {
                 doBfsVisit(i, visited, consumer);
             }
@@ -205,7 +221,7 @@ public class Graph <T> {
      * @return 第一条邻边的顶点下标，-1 则不存在邻边
      */
     public int getFirstNeighbor(int current) {
-        for (int i = 0; i < getVertexNumber(); i++) {
+        for (int i = 0; i < getVertexTotal(); i++) {
             if (edges[current][i] > 0) {
                 return i;
             }
@@ -221,7 +237,7 @@ public class Graph <T> {
      * @return 下一条邻边下标，-1 则不存在邻边
      */
     public int getNextNeighbor(int current, int lastIndex) {
-        for (int i = lastIndex + 1; i < getVertexNumber(); i ++) {
+        for (int i = lastIndex + 1; i < getVertexTotal(); i ++) {
             if (edges[current][i] > 0) {
                 return i;
             }
