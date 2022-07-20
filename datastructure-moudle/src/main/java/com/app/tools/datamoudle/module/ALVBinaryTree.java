@@ -9,17 +9,17 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * 平衡二叉树
+ * ALV平衡二叉树
  *
  * @author yanggy
  */
-public class BalancedBinaryTree<T> extends BinarySortTree<T> {
+public class ALVBinaryTree<T> extends BinarySortTree<T> {
 
-    public BalancedBinaryTree(Comparator<T> comparator) {
+    public ALVBinaryTree(Comparator<T> comparator) {
         super(comparator);
     }
 
-    public BalancedBinaryTree(BinaryTreeNode<T> root, Comparator<T> comparator) {
+    public ALVBinaryTree(BinaryTreeNode<T> root, Comparator<T> comparator) {
         super(root, comparator);
     }
 
