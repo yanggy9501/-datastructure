@@ -1,4 +1,6 @@
-package com.app.tools.datamoudle.module.queue;
+package com.app.tools.datamoudle.module;
+
+import com.app.tools.datamoudle.module.queue.AbstractQueue;
 
 /**
  * 数组实现的队列
@@ -6,7 +8,9 @@ package com.app.tools.datamoudle.module.queue;
  * @author yanggy
  */
 public class ArrayQueue<T> extends AbstractQueue<T> {
-
+    /**
+     * 队列
+     */
     private final Object[] queue;
 
     /**
@@ -19,8 +23,8 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
      */
     private int rear;
 
-    public ArrayQueue(int initLength) {
-        this.queue = new Object[initLength];
+    public ArrayQueue(int initSize) {
+        this.queue = new Object[initSize + 1];
         this.head = rear = 0;
     }
 

@@ -38,14 +38,14 @@ public abstract class AbstractQueue<T> {
     /**
      * 判断队列是否为空
      *
-     * @return boolean true-则队列为空，否则队列非空
+     * @return boolean true则队列为空，否则队列非空
      */
     public abstract boolean isEmpty();
 
     /**
      * 判断队列是否已满
      *
-     * @return boolean true-则队已满
+     * @return boolean true则队已满，否则队列非满
      */
     protected abstract boolean isFull();
 }

@@ -1,4 +1,6 @@
-package com.app.tools.datamoudle.module.queue;
+package com.app.tools.datamoudle.module;
+
+import com.app.tools.datamoudle.module.queue.AbstractQueue;
 
 import java.util.LinkedList;
 
@@ -25,14 +27,17 @@ public class LinkedQueue<T> extends AbstractQueue<T> {
 
     @Override
     public T dequeue() {
-        if (!isEmpty()) {
-            return queue.removeFirst();
+        if (isEmpty()) {
+            return null;
         }
-        return null;
+        return queue.removeFirst();
     }
 
     @Override
     public T getHead() {
+        if (isEmpty()) {
+            return null;
+        }
         return queue.getFirst();
     }
 
@@ -43,7 +48,7 @@ public class LinkedQueue<T> extends AbstractQueue<T> {
 
     @Override
     public boolean isEmpty() {
-        return queue.size() <= 0;
+        return length() == 0;
     }
 
     @Override
