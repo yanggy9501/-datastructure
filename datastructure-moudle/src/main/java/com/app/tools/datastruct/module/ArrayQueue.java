@@ -39,6 +39,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T dequeue() {
         head = getIndex(head + 1);
         T d = (T) queue[head];
@@ -47,6 +48,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T getHead() {
         return (T) queue[getIndex(head + 1)];
     }

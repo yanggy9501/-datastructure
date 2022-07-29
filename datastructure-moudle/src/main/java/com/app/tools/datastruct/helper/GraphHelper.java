@@ -48,6 +48,7 @@ public class GraphHelper {
      * @param <T> 数据泛型
      * @return 最小生成树
      */
+    @SuppressWarnings("unchecked")
     public static <T, W> MatrixGraph<T, W> findMstByPrim(MatrixGraph<T, W> matrixGraph, int begin) {
         int vertexNumber = matrixGraph.getVertexTotal();
         // visited 数组用于记录各个顶点属于最小生成树类集合 A 还是原始图中待加入最小生成树类的集合 B。false代表是B类， true代表是A类
@@ -101,6 +102,7 @@ public class GraphHelper {
      * @param comparator 权重的比较器, 权重为 null一般代表无穷大
      * @return 节点下标 -1代表找不到
      */
+    @SuppressWarnings("unchecked")
     private static <W> int findMinWeightKey(Object[] weight, boolean[] visited, Comparator<W> comparator) {
         // null 一般代表路径不通，即可表示权重很大，可根据比较器表示不同含义，这里将min设置为第一个未被访问的节点的权重，防止null有特殊。
         W min = null;

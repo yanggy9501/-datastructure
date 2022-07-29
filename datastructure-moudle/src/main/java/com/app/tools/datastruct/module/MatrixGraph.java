@@ -117,6 +117,7 @@ public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
      * @return 顶点间的权值
      */
     @Override
+    @SuppressWarnings("unchecked")
     public W getWeight(int vertex, int anotherVertex) {
         if (isAdjaceted(vertex, anotherVertex)) {
             return  ((Edge<W>) edges[vertex][anotherVertex]).getWeight();
@@ -132,6 +133,7 @@ public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
      * @param weight 权重
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void setWeight(int vertex, int anotherVertex, W weight) {
         if (isAdjaceted(vertex, anotherVertex)) {
             ((Edge<W>) edges[vertex][anotherVertex]).setWeight(weight);
