@@ -1,22 +1,21 @@
 package com.app.tools.datastruct.module;
 
+import com.app.tools.datastruct.exception.EdgeException;
 import com.app.tools.datastruct.module.graph.AbstractGraph;
+import com.app.tools.datastruct.module.graph.Edge;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /**
  * 邻接矩阵表示法存储的图
  *
- * @author yanggy
+ * @param <T> 数据源泛型
+ * @param <W> 权重泛型
  */
 @Getter
-public class MatrixGraph<T> implements AbstractGraph<T> {
+public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
     /**
      * 顶点集
      */
@@ -25,21 +24,23 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
     /**
      * 边集，权重为 0 则边不存在
      */
-    private final int[][] edges;
+    private final Object[][] edges;
 
     /**
      * 边的总数
      */
     private int edgeTotal;
 
-    /**
-     * 断言：判断权重 weight 以定边是否存在
-     */
-    private Predicate<Integer> predicate = (weight) -> weight != 0;
-
     public MatrixGraph(int vertexTotal) {
-        edges = new int[vertexTotal][vertexTotal];
+        edges = new Object[vertexTotal][vertexTotal];
         vertexes = new ArrayList<>();
+    }
+
+    public MatrixGraph(int vertexTotal, Comparator<W> weightComparator) {
+        edges = new Object[vertexTotal][vertexTotal];
+        this.weightComparator = weightComparator;
+        vertexes = new ArrayList<>();
+
     }
 
     /**
@@ -53,16 +54,22 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
     }
 
     /**
-     * 添加边
+     * 添加边，如果边已经存储在则修改权值
      *
      * @param vertex 顶点1所在数组下标
      * @param anotherVertex 顶点2所在数组下标
      * @param weight 权重
      */
     @Override
-    public void addEdge(int vertex, int anotherVertex, int weight) {
-        edges[vertex][anotherVertex] = weight;
-        edges[anotherVertex][vertex] = weight;
+    public void addEdge(int vertex, int anotherVertex, W weight) {
+        if (isAdjaceted(vertex, anotherVertex)) {
+            setWeight(vertex, anotherVertex, weight);
+            return;
+        }
+        edges[vertex][anotherVertex] = new Edge<>(vertex, anotherVertex, weight);
+        if (!isDigraph()) {
+            edges[anotherVertex][vertex] = new Edge<>(anotherVertex, vertex, weight);
+        }
         edgeTotal++;
     }
 
@@ -74,9 +81,11 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
      */
     @Override
     public void removeEdge(int vertex, int anotherVertex) {
-        edges[vertex][anotherVertex] = 0;
-        edges[anotherVertex][vertex] = 0;
-        edgeTotal++;
+        edges[vertex][anotherVertex] = null;
+        if (!isDigraph()) {
+            edges[anotherVertex][vertex] = null;
+        }
+        edgeTotal--;
     }
 
     /**
@@ -108,8 +117,11 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
      * @return 顶点间的权值
      */
     @Override
-    public int getWeight(int vertex, int anotherVertex) {
-        return edges[vertex][anotherVertex];
+    public W getWeight(int vertex, int anotherVertex) {
+        if (isAdjaceted(vertex, anotherVertex)) {
+            return  ((Edge<W>) edges[vertex][anotherVertex]).getWeight();
+        }
+        throw new EdgeException("edge: " + "<" + vertex + ", " + anotherVertex +">" + "is nonexistent");
     }
 
     /**
@@ -120,14 +132,22 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
      * @param weight 权重
      */
     @Override
-    public void setWeight(int vertex, int anotherVertex, int weight) {
-        edges[vertex][anotherVertex] = weight;
-        edges[anotherVertex][vertex] = weight;
+    public void setWeight(int vertex, int anotherVertex, W weight) {
+        if (isAdjaceted(vertex, anotherVertex)) {
+            ((Edge<W>) edges[vertex][anotherVertex]).setWeight(weight);
+            if (!isDigraph()) {
+                ((Edge<W>) edges[anotherVertex][vertex]).setWeight(weight);
+            }
+        } else {
+            // 添加边，边++
+            addEdge(vertex, anotherVertex, weight);
+        }
+
     }
 
     @Override
     public boolean isAdjaceted(int vertex, int anotherVertex) {
-        return predicate.test(edges[vertex][anotherVertex]);
+        return edges[vertex][anotherVertex] != null;
     }
 
     /**
@@ -139,7 +159,7 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
     @Override
     public int getFirstNeighbor(int vertex) {
         for (int i = 0; i < getVertexTotal(); i++) {
-            if (predicate.test(edges[vertex][i])) {
+            if (isAdjaceted(vertex, i)) {
                 return i;
             }
         }
@@ -156,7 +176,7 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
     @Override
     public int getNextNeighbor(int vertex, int lastIndex) {
         for (int i = lastIndex + 1; i < getVertexTotal(); i ++) {
-            if (predicate.test(edges[vertex][i])) {
+            if (isAdjaceted(vertex, i)) {
                 return i;
             }
         }
@@ -167,7 +187,7 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
     public List<Integer> getNeighbors(int vertex) {
         ArrayList<Integer> vertexList = new ArrayList<>();
         for (int i = 0; i < edges[vertex].length; i++) {
-            if (predicate.test(edges[vertex][i])) {
+            if (isAdjaceted(vertex, i)) {
                 vertexList.add(i);
             }
         }
@@ -179,7 +199,7 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
      */
     @Override
     public void printGraph() {
-        for (int[] links : edges) {
+        for (Object[] links : edges) {
             System.out.println(Arrays.toString(links));
         }
     }
@@ -289,9 +309,5 @@ public class MatrixGraph<T> implements AbstractGraph<T> {
                 n = getNextNeighbor(v, n);
             }
         }
-    }
-
-    void setPredicate(Predicate<Integer> predicate) {
-        this.predicate = predicate;
     }
 }

@@ -17,8 +17,8 @@ public class TestGraph1 {
            E [0, 1, 0, 0, 0]
       */
 
-    public MatrixGraph<String> createGraph() {
-        MatrixGraph<String> matrixGraph = new MatrixGraph<>(5);
+    public MatrixGraph<String, Integer> createGraph() {
+        MatrixGraph<String, Integer> matrixGraph = new MatrixGraph<>(5);
         // 添加顶点
         String[] vertexes = {"A", "B", "C", "D", "E"};
         Stream.of(vertexes).forEach(matrixGraph::addVertex);
@@ -35,13 +35,13 @@ public class TestGraph1 {
 
     @Test
     public void testDfs() {
-        MatrixGraph<String> matrixGraph = createGraph();
+        MatrixGraph<String, Integer> matrixGraph = createGraph();
         matrixGraph.dfsVisit(4, System.out::println);
     }
 
     @Test
     public void testBfs() {
-        MatrixGraph<String> matrixGraph = createGraph();
+        MatrixGraph<String, Integer> matrixGraph = createGraph();
         matrixGraph.bfsVisit(4, System.out::println);
     }
 }
