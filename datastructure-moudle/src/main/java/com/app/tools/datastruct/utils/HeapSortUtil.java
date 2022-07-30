@@ -9,7 +9,7 @@ import java.util.Comparator;
  */
 public class HeapSortUtil {
     /**
-     * 堆排序 array
+     * 升序排序
      *
      * @param array 待排序数组
      * @param comparator 比较器

@@ -1,6 +1,6 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
-import com.app.tools.datastruct.module.stack.AbstractStack;
+import com.app.tools.datastruct.datamodule.stack.AbstractStack;
 
 import java.util.LinkedList;
 

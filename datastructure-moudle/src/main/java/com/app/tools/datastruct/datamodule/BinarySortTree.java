@@ -1,6 +1,6 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
-import com.app.tools.datastruct.module.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
 import com.app.tools.datastruct.helper.BinaryTreeHelper;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +23,6 @@ public class BinarySortTree<T> extends BinaryTree<T> {
     private Comparator<T> comparator;
 
     public BinarySortTree(Comparator<T> comparator) {
-        this.comparator = comparator;
-    }
-
-    public BinarySortTree(BinaryTreeNode<T> root, Comparator<T> comparator) {
-        super(root);
         this.comparator = comparator;
     }
 
@@ -76,12 +71,12 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      *
      * @param targetValue 待删除节点值
      */
-   public void deleteSortedTreeNode(T targetValue) {
+   public void delete(T targetValue) {
        BinaryTreeNode<T> targetNode = search(targetValue);
        if (targetNode == null) {
            return;
        }
-       BinaryTreeNode<T> parentNode = searchParentNode(targetNode);
+       BinaryTreeNode<T> parentNode = findParent(targetNode);
        if (BinaryTreeHelper.isLeafNode(targetNode)) {
             // 若targetNode 是叶子节点
            deleteLeafNode(targetNode, parentNode);
@@ -174,24 +169,11 @@ public class BinarySortTree<T> extends BinaryTree<T> {
     }
 
     /**
-     * 二叉树删除与二叉排序树删除有区别，二叉排序树禁用删除二叉树的deleteNode方法
-     *
-     * @param predicate 比较器
-     */
-    @Deprecated
-    @Override
-    public void deleteNode(Predicate<BinaryTreeNode<T>> predicate) {
-        super.deleteNode(predicate);
-    }
-
-    /**
-     * 二叉排序数的中序查找（覆写并弃用）
-     * 在有序的情况下，采用全部遍历不可取
+     * 二叉排序数的中序查找，二叉排序树采用遍历查找不可取
      *
      * @param predicate 断言
      * @return BinaryTreeNode<T>
      */
-    @Deprecated
     @Override
     public BinaryTreeNode<T> infixOrderSearch(Predicate<BinaryTreeNode<T>> predicate) {
         return super.infixOrderSearch(predicate);
@@ -223,7 +205,7 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * @param targetNode targetNode必须尾BinarySortTree中的节点
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> searchParentNode(BinaryTreeNode<T> targetNode) {
+    public BinaryTreeNode<T> findParent(BinaryTreeNode<T> targetNode) {
         if (targetNode == null) {
             return null;
         }
@@ -246,7 +228,7 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * @param targetValue 目标节点的值
      * @return BinaryTreeNode<T>
      */
-    public BinaryTreeNode<T> searchParentNode(T targetValue) {
+    public BinaryTreeNode<T> findParent(T targetValue) {
         if (targetValue == null) {
             return null;
         }

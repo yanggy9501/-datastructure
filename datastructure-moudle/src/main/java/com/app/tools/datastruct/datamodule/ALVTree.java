@@ -1,33 +1,46 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
 import com.app.tools.datastruct.helper.BinaryTreeHelper;
-import com.app.tools.datastruct.module.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * ALV平衡二叉树
  *
  * @author yanggy
  */
-public class ALVBinaryTree<T> extends BinarySortTree<T> {
+public class ALVTree<T> extends BinarySortTree<T> {
 
-    public ALVBinaryTree(Comparator<T> comparator) {
+    public ALVTree(Comparator<T> comparator) {
         super(comparator);
-    }
-
-    public ALVBinaryTree(BinaryTreeNode<T> root, Comparator<T> comparator) {
-        super(root, comparator);
     }
 
     @Override
     public void add(T data) {
         super.add(data);
-        // 调整,如果出现不平衡节点的话，否则不操作
-        mightBalance(data);
+        // 调整，如果出现不平衡节点的话，否则不操作
+        balanceIfNeeded(data);
+    }
+
+    @Override
+    public void delete(T targetValue) {
+        super.delete(targetValue);
+         balanceIfNeeded(targetValue);
+    }
+
+    @Override
+    public void remove(Predicate<BinaryTreeNode<T>> predicate) {
+        super.remove(predicate);
+        // 删除节点及其子树，肯定出现多处不平衡了，需要重新整体调整
+        BinaryTreeNode<T> root = getRoot();
+        setRoot(null);
+        // 使用层次遍历添加效果会比较好
+        BinaryTreeHelper.levelOrder(root, node -> add(node.getData()));
     }
 
     /**
@@ -35,7 +48,7 @@ public class ALVBinaryTree<T> extends BinarySortTree<T> {
      *
      * @param data 添加节点的data域
      */
-    private void mightBalance(T data) {
+    private void balanceIfNeeded(T data) {
         // 判断添加后是否是平衡二叉树（不平衡子树一定在添加节点的路径上）
         List<BinaryTreeNode<T>> visitPath = getVisitPath(data);
         // root --> node 倒序为 node --> root 以方便找第一个从叶子节点开始的不平衡子树
@@ -107,7 +120,7 @@ public class ALVBinaryTree<T> extends BinarySortTree<T> {
             node =
                 getComparator().compare(targetNodeValue, node.getData()) < 0 ? node.getLeftNode() : node.getRightNode();
         }
-        return Collections.emptyList();
+        return path;
     }
 
     /**

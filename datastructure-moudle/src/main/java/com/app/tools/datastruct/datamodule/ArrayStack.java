@@ -1,6 +1,6 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
-import com.app.tools.datastruct.module.stack.AbstractStack;
+import com.app.tools.datastruct.datamodule.stack.AbstractStack;
 
 /**
  * 数组实现的栈
@@ -33,6 +33,7 @@ public class ArrayStack<T> extends AbstractStack<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T pop() {
         if (isEmpty()) {
             return null;
@@ -41,6 +42,7 @@ public class ArrayStack<T> extends AbstractStack<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T getHead() {
         return (T) stack[top];
     }

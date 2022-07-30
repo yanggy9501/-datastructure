@@ -1,7 +1,7 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
 import com.app.tools.datastruct.helper.BinaryTreeHelper;
-import com.app.tools.datastruct.module.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
 import lombok.*;
 
 import java.util.function.Consumer;
@@ -57,6 +57,17 @@ public class BinaryTree<T> {
     }
 
     /**
+     * 层次遍历
+     *
+     * @param consumer 消费者
+     */
+    public void levelOrder(Consumer<BinaryTreeNode<T>> consumer) {
+        if (root != null) {
+            BinaryTreeHelper.levelOrder(root, consumer);
+        }
+    }
+
+    /**
      * 前序查找节点
      *
      * @param predicate 断言
@@ -100,7 +111,7 @@ public class BinaryTree<T> {
      *
      * @param predicate 比较器
      */
-    public void deleteNode(Predicate<BinaryTreeNode<T>> predicate) {
+    public void remove(Predicate<BinaryTreeNode<T>> predicate) {
         if (root == null) {
             return;
         }
@@ -108,7 +119,7 @@ public class BinaryTree<T> {
             root = null;
             return;
         }
-        BinaryTreeHelper.deleteNode(root, predicate);
+        BinaryTreeHelper.remove(root, predicate);
     }
 
     /**

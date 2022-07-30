@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.test.tree;
 
-import com.app.tools.datastruct.module.binarytree.ThreadedBinaryTreeNode;
+import com.app.tools.datastruct.datamodule.binarytree.ThreadedBinaryTreeNode;
 import com.app.tools.datastruct.dto.Hero;
 import com.app.tools.datastruct.helper.ThreadedBinaryTreeHelper;
 import org.junit.Test;

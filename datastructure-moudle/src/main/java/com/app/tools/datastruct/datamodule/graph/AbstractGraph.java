@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.graph;
+package com.app.tools.datastruct.datamodule.graph;
 
 import lombok.Getter;
 import lombok.Setter;

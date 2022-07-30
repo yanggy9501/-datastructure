@@ -1,7 +1,9 @@
 package com.app.tools.datastruct.helper;
 
 
-import com.app.tools.datastruct.module.MatrixGraph;
+import com.app.tools.datastruct.datamodule.MatrixGraph;
+import com.app.tools.datastruct.datamodule.graph.Edge;
+import com.app.tools.datastruct.utils.HeapSortUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -125,7 +127,8 @@ public class GraphHelper {
      * @return 最小生成树
      */
     private static <T, W> MatrixGraph<T, W> createMstTreeByPrim(int[] parent, MatrixGraph<T, W> matrixGraph) {
-        MatrixGraph<T, W> mstMatrixGraph = new MatrixGraph<>(matrixGraph.getVertexTotal());
+        MatrixGraph<T, W> mstMatrixGraph =
+            new MatrixGraph<>(matrixGraph.getVertexTotal(), matrixGraph.getWeightComparator());
         for (int i = 0; i < parent.length; i++) {
             mstMatrixGraph.addVertex(matrixGraph.getValue(i));
             // 起始节点的parent = -1
@@ -135,4 +138,48 @@ public class GraphHelper {
         }
         return mstMatrixGraph;
     }
+
+    /**
+     * 连通图的 prim 算法生成最小生成树。如果图不连通最小生成将不会有不连通的节点。
+     *
+     * @param matrixGraph 连通图
+     * @param begin 开始节点
+     * @param <T> 数据泛型
+     * @return 最小生成树
+     */
+
+    public static <T, W> MatrixGraph<T, W> findMstByKrusalCase(MatrixGraph<T, W> matrixGraph, int begin) {
+        W[] weightOfEdge = getEdges(matrixGraph);
+        HeapSortUtil.heapSort(weightOfEdge, matrixGraph.getWeightComparator());
+
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T, W> W[] getEdges(MatrixGraph<T, W> matrixGraph) {
+        Object[] edgeArr = new Object[matrixGraph.getEdgeTotal()];
+        Object[][] edges = matrixGraph.getEdges();
+        int n = 0;
+        if (matrixGraph.isDigraph()) {
+            for (int i = 0; i < edges.length; i++) {
+                for (int j = 0; j < edges.length; j++) {
+                    if (matrixGraph.isAdjaceted(i, j)) {
+                        edgeArr[n++] =  ((Edge<W>) edges[i][j]).getWeight();
+                    }
+                }
+            }
+            return (W[]) edgeArr;
+        }
+
+        // 无向图
+        for (int i = 0; i < edges.length; i++) {
+            for (int j = i + 1; j < edges.length; j++) {
+                if (matrixGraph.isAdjaceted(i, j)) {
+                    edgeArr[n++] = ((Edge<W>) edges[i][j]).getWeight();
+                }
+            }
+        }
+        return (W[]) edgeArr;
+    }
+
 }

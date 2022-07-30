@@ -1,9 +1,9 @@
 package com.app.tools.datastruct.test.tree;
 
 import com.app.tools.datastruct.dto.Hero;
-import com.app.tools.datastruct.module.BinaryTree;
-import com.app.tools.datastruct.module.binarytree.BinaryTreeNode;
-import com.app.tools.datastruct.module.ArrayBinaryTree;
+import com.app.tools.datastruct.datamodule.BinaryTree;
+import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.datamodule.ArrayBinaryTree;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -72,7 +72,6 @@ public class BinaryTreeTest {
         Hero hero7 = new Hero(7, "关胜");
 
         ArrayList<Hero> data = new ArrayList<>();
-        data.add(null);
         data.add(hero1);
         data.add(hero2);
         data.add(hero3);
@@ -90,6 +89,12 @@ public class BinaryTreeTest {
         binaryTree.preOrder(heroBinaryTreeNode -> System.out.println(heroBinaryTreeNode.toString()));
 //        binaryTree.infixOrder();
 //        binaryTree.postOrder();
+    }
+
+    @Test
+    public void testLevelOrder() {
+        BinaryTree<Hero> binaryTree = newBinaryTree();
+        binaryTree.levelOrder(heroBinaryTreeNode -> System.out.println(heroBinaryTreeNode.toString()));
     }
 
     @Test

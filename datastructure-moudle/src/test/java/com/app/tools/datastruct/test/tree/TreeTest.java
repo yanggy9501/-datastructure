@@ -2,7 +2,7 @@ package com.app.tools.datastruct.test.tree;
 
 import com.app.tools.datastruct.dto.Menu;
 import com.app.tools.datastruct.helper.TreeHelper;
-import com.app.tools.datastruct.module.tree.TreeNode;
+import com.app.tools.datastruct.datamodule.tree.TreeNode;
 import org.junit.Test;
 
 import java.util.ArrayList;

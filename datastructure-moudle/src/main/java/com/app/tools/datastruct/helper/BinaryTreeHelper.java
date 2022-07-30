@@ -1,7 +1,8 @@
 package com.app.tools.datastruct.helper;
 
-import com.app.tools.datastruct.module.BinaryTree;
-import com.app.tools.datastruct.module.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.datamodule.BinaryTree;
+import com.app.tools.datastruct.datamodule.LinkedQueue;
+import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +16,17 @@ import java.util.function.Predicate;
  */
 public class BinaryTreeHelper {
     // ******************************************************** 前序处理 *************************************************
+
+    /**
+     * 前序遍历
+     *
+     * @param binaryTree 二叉树
+     * @param consumer 节点的消费者
+     */
+    public static <T>  void preOrder(BinaryTree<T> binaryTree, Consumer<BinaryTreeNode<T>> consumer) {
+        preOrder(binaryTree.getRoot(), consumer);
+    }
+
     /**
      * 前序遍历
      *
@@ -32,13 +44,16 @@ public class BinaryTreeHelper {
     }
 
     /**
-     * 前序遍历
+     * 前序遍历查找二叉树的某个节点
      *
      * @param binaryTree 二叉树
-     * @param consumer 节点的消费者
+     * @param predicate 断言
+     * @param <T> 数据泛型
+     * @return BinaryTreeNode<T> 树的节点
      */
-    public static <T>  void preOrder(BinaryTree<T> binaryTree, Consumer<BinaryTreeNode<T>> consumer) {
-        preOrder(binaryTree.getRoot(), consumer);
+    public static <T> BinaryTreeNode<T> preOrderSearch(BinaryTree<T> binaryTree,
+        Predicate<BinaryTreeNode<T>> predicate) {
+        return preOrderSearch(binaryTree.getRoot(), predicate);
     }
 
     /**
@@ -66,20 +81,17 @@ public class BinaryTreeHelper {
         return resultNode;
     }
 
+    // ******************************************************** 中序处理 ************************************************/
+
     /**
-     * 前序遍历查找二叉树的某个节点
+     * 中序遍历
      *
      * @param binaryTree 二叉树
-     * @param predicate 断言
-     * @param <T> 数据泛型
-     * @return BinaryTreeNode<T> 树的节点
+     * @param consumer 节点的消费者
      */
-    public static <T> BinaryTreeNode<T> preOrderSearch(BinaryTree<T> binaryTree,
-        Predicate<BinaryTreeNode<T>> predicate) {
-        return preOrderSearch(binaryTree.getRoot(), predicate);
+    public static <T> void infixOrder(BinaryTree<T> binaryTree,  Consumer<BinaryTreeNode<T>> consumer) {
+        infixOrder(binaryTree.getRoot(), consumer);
     }
-
-    // ******************************************************** 中序处理 ************************************************/
 
     /**
      * 中序遍历
@@ -98,13 +110,16 @@ public class BinaryTreeHelper {
     }
 
     /**
-     * 中序遍历
+     * 中序遍历查找二叉树的某个节点。
      *
      * @param binaryTree 二叉树
-     * @param consumer 节点的消费者
+     * @param predicate 断言
+     * @param <T> 数据泛型
+     * @return BinaryTreeNode<T> 树的节点
      */
-    public static <T> void infixOrder(BinaryTree<T> binaryTree,  Consumer<BinaryTreeNode<T>> consumer) {
-        infixOrder(binaryTree.getRoot(), consumer);
+    public static <T> BinaryTreeNode<T> infixOrderSearch(BinaryTree<T> binaryTree,
+        Predicate<BinaryTreeNode<T>> predicate) {
+        return infixOrderSearch(binaryTree.getRoot(), predicate);
     }
 
     /**
@@ -133,20 +148,17 @@ public class BinaryTreeHelper {
         return resultNode;
     }
 
+    // ******************************************************** 后序处理 ************************************************/
+
     /**
-     * 中序遍历查找二叉树的某个节点。
+     * 后序遍历
      *
      * @param binaryTree 二叉树
-     * @param predicate 断言
-     * @param <T> 数据泛型
-     * @return BinaryTreeNode<T> 树的节点
+     * @param consumer 节点的消费者
      */
-    public static <T> BinaryTreeNode<T> infixOrderSearch(BinaryTree<T> binaryTree,
-        Predicate<BinaryTreeNode<T>> predicate) {
-        return infixOrderSearch(binaryTree.getRoot(), predicate);
+    public static <T> void postOrder(BinaryTree<T> binaryTree, Consumer<BinaryTreeNode<T>> consumer) {
+        postOrder(binaryTree.getRoot(), consumer);
     }
-
-    // ******************************************************** 后序处理 ************************************************/
 
     /**
      * 后序遍历
@@ -165,13 +177,16 @@ public class BinaryTreeHelper {
     }
 
     /**
-     * 后序遍历
+     * 后序遍历查找二叉树的某个节点
      *
      * @param binaryTree 二叉树
-     * @param consumer 节点的消费者
+     * @param predicate 断言
+     * @param <T> 数据泛型
+     * @return BinaryTreeNode<T> 树的节点
      */
-    public static <T> void postOrder(BinaryTree<T> binaryTree, Consumer<BinaryTreeNode<T>> consumer) {
-        postOrder(binaryTree.getRoot(), consumer);
+    public static <T> BinaryTreeNode<T> postOrderSearch(BinaryTree<T> binaryTree,
+        Predicate<BinaryTreeNode<T>> predicate) {
+        return postOrderSearch(binaryTree.getRoot(), predicate);
     }
 
     /**
@@ -203,17 +218,37 @@ public class BinaryTreeHelper {
         return null;
     }
 
+    // ******************************************************** 层次处理 ************************************************/
+
     /**
-     * 后序遍历查找二叉树的某个节点
+     * 层次遍历
      *
      * @param binaryTree 二叉树
-     * @param predicate 断言
-     * @param <T> 数据泛型
-     * @return BinaryTreeNode<T> 树的节点
+     * @param consumer 节点的消费者
      */
-    public static <T> BinaryTreeNode<T> postOrderSearch(BinaryTree<T> binaryTree,
-        Predicate<BinaryTreeNode<T>> predicate) {
-        return postOrderSearch(binaryTree.getRoot(), predicate);
+    public static <T> void levelOrder(BinaryTree<T> binaryTree, Consumer<BinaryTreeNode<T>> consumer) {
+        levelOrder(binaryTree.getRoot(), consumer);
+    }
+    /**
+     * 层次遍历
+     *
+     * @param root "root"节点
+     * @param consumer 节点的消费者
+     */
+    public static <T> void levelOrder(BinaryTreeNode<T> root, Consumer<BinaryTreeNode<T>> consumer) {
+        LinkedQueue<BinaryTreeNode<T>> queue = new LinkedQueue<>();
+        BinaryTreeNode<T> node;
+        queue.enqueue(root);
+        while (!queue.isEmpty()) {
+            node = queue.dequeue();
+            consumer.accept(node);
+            if (node.getLeftNode() != null) {
+                queue.enqueue(node.getLeftNode());
+            }
+            if (node.getRightNode() != null) {
+                queue.enqueue(node.getRightNode());
+            }
+        }
     }
 
     /**
@@ -226,20 +261,20 @@ public class BinaryTreeHelper {
      * @param predicate 断言
      * @param <T> 数据泛型
      */
-    public static <T> void deleteNode(BinaryTreeNode<T> root, Predicate<BinaryTreeNode<T>> predicate) {
+    public static <T> void remove(BinaryTreeNode<T> root, Predicate<BinaryTreeNode<T>> predicate) {
         if (root.getLeftNode() != null && predicate.test(root.getLeftNode())){
             // delete left node
             root.setLeftNode(null);
         }
-        if (root.getRightNode() != null && predicate.test(root.getLeftNode())){
+        if (root.getRightNode() != null && predicate.test(root.getRightNode())){
             // delete right node
             root.setRightNode(null);
         }
         if (root.getLeftNode() != null) {
-            deleteNode(root.getLeftNode(), predicate);
+            remove(root.getLeftNode(), predicate);
         }
         if (root.getRightNode() != null) {
-            deleteNode(root.getRightNode(), predicate);
+            remove(root.getRightNode(), predicate);
         }
     }
 
@@ -250,8 +285,8 @@ public class BinaryTreeHelper {
      * @param predicate 断言
      * @param <T> 数据泛型
      */
-    public static <T> void deleteNode(BinaryTree<T> binaryTree, Predicate<BinaryTreeNode<T>> predicate) {
-        deleteNode(binaryTree.getRoot(), predicate);
+    public static <T> void remove(BinaryTree<T> binaryTree, Predicate<BinaryTreeNode<T>> predicate) {
+        remove(binaryTree.getRoot(), predicate);
     }
 
     // ******************************************************** 其他处理 ************************************************/

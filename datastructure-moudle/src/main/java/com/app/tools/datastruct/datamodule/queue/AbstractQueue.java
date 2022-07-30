@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.queue;
+package com.app.tools.datastruct.datamodule.queue;
 
 /**
  * 队列抽象接口

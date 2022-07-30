@@ -1,7 +1,7 @@
 package com.app.tools.datastruct.helper;
 
 
-import com.app.tools.datastruct.module.tree.TreeNode;
+import com.app.tools.datastruct.datamodule.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

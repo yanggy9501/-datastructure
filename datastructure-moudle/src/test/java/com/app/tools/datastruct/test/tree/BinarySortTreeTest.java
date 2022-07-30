@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.test.tree;
 
-import com.app.tools.datastruct.module.BinarySortTree;
+import com.app.tools.datastruct.datamodule.BinarySortTree;
 import org.junit.Test;
 
 /**
@@ -40,37 +40,37 @@ public class BinarySortTreeTest {
     @Test
     public void testDeleteLeafNode() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
-        binarySortTree.deleteSortedTreeNode(4);
-        binarySortTree.deleteSortedTreeNode(9);
-        binarySortTree.deleteSortedTreeNode(11);
-        binarySortTree.deleteSortedTreeNode(1111);
+        binarySortTree.delete(4);
+        binarySortTree.delete(9);
+        binarySortTree.delete(11);
+        binarySortTree.delete(1111);
         binarySortTree.infixOrder(System.out::println);
     }
 
     @Test
     public void testDeleteSingleBranchNode() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
-        binarySortTree.deleteSortedTreeNode(3);
+        binarySortTree.delete(3);
         binarySortTree.infixOrder(System.out::println);
     }
 
     @Test
     public void testDeleteDoubleBranchNode() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
-        binarySortTree.deleteSortedTreeNode(5);
+        binarySortTree.delete(5);
         binarySortTree.infixOrder(System.out::println);
     }
 
     @Test
     public void testDeleteDNode() {
         BinarySortTree<Integer> binarySortTree = createBinarySortTree();
-        binarySortTree.deleteSortedTreeNode(5);
-        binarySortTree.deleteSortedTreeNode(-5);
-        binarySortTree.deleteSortedTreeNode(3);
-        binarySortTree.deleteSortedTreeNode(4);
-        binarySortTree.deleteSortedTreeNode(10);
-        binarySortTree.deleteSortedTreeNode(11);
-        binarySortTree.deleteSortedTreeNode(1);
+        binarySortTree.delete(5);
+        binarySortTree.delete(-5);
+        binarySortTree.delete(3);
+        binarySortTree.delete(4);
+        binarySortTree.delete(10);
+        binarySortTree.delete(11);
+        binarySortTree.delete(1);
         binarySortTree.infixOrder(System.out::println);
     }
 }

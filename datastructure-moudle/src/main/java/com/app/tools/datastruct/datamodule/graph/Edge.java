@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.graph;
+package com.app.tools.datastruct.datamodule.graph;
 
 import lombok.Data;
 
@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class Edge<W> {
     /**
-     * 边的开始节点
+     * 边的起点
      */
     private int from;
 
     /**
-     * 边的结束节点
+     * 边的终点
      */
     private int to;
 

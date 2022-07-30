@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.stack;
+package com.app.tools.datastruct.datamodule.stack;
 
 /**
  * 栈的抽象接口

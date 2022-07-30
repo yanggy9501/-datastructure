@@ -1,7 +1,7 @@
 package com.app.tools.datastruct.test.prime;
 
 import com.app.tools.datastruct.helper.GraphHelper;
-import com.app.tools.datastruct.module.MatrixGraph;
+import com.app.tools.datastruct.datamodule.MatrixGraph;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -65,5 +65,23 @@ public class PrrimAlgorithm {
         });
         MatrixGraph<String, Integer> prim = GraphHelper.findMstByPrim(matrixGraph, 0);
         prim.printGraph();
+    }
+
+    @Test
+    public void t() {
+        MatrixGraph<String, Integer> matrixGraph = createGraph();
+        matrixGraph.setWeightComparator((o1, o2) -> {
+            if (o1 == null && o2 == null) {
+                return 0;
+            }
+            if (o1 == null) {
+                return 1;
+            }
+            if (o2 == null) {
+                return -1;
+            }
+            return o1 - o2;
+        });
+        MatrixGraph<String, Integer> g = GraphHelper.findMstByKrusalCase(matrixGraph, 0);
     }
 }

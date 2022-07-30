@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.test.queue;
 
-import com.app.tools.datastruct.module.ArrayQueue;
+import com.app.tools.datastruct.datamodule.ArrayQueue;
 import org.junit.Test;
 
 /**

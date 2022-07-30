@@ -1,8 +1,8 @@
-package com.app.tools.datastruct.module;
+package com.app.tools.datastruct.datamodule;
 
 import com.app.tools.datastruct.exception.EdgeException;
-import com.app.tools.datastruct.module.graph.AbstractGraph;
-import com.app.tools.datastruct.module.graph.Edge;
+import com.app.tools.datastruct.datamodule.graph.AbstractGraph;
+import com.app.tools.datastruct.datamodule.graph.Edge;
 import lombok.Getter;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.binarytree;
+package com.app.tools.datastruct.datamodule.binarytree;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

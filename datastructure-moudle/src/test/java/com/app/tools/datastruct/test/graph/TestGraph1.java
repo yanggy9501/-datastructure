@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.test.graph;
 
-import com.app.tools.datastruct.module.MatrixGraph;
+import com.app.tools.datastruct.datamodule.MatrixGraph;
 import org.junit.Test;
 
 import java.util.stream.Stream;

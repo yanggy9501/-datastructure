@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.helper;
 
-import com.app.tools.datastruct.module.binarytree.ThreadedBinaryTreeNode;
+import com.app.tools.datastruct.datamodule.binarytree.ThreadedBinaryTreeNode;
 
 import java.util.function.Consumer;
 

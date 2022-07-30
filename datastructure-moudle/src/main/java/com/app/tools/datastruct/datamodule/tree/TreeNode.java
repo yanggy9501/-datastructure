@@ -1,4 +1,4 @@
-package com.app.tools.datastruct.module.tree;
+package com.app.tools.datastruct.datamodule.tree;
 
 import lombok.Data;
 
