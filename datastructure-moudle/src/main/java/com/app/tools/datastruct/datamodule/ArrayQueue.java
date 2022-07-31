@@ -55,7 +55,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 
     @Override
     public int length() {
-        return queue.length;
+        return ((rear - head) + queue.length) % queue.length;
     }
 
     @Override
@@ -65,10 +65,10 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 
     @Override
     protected boolean isFull() {
-        return (rear + 1 + length()) % length() == head;
+        return (rear + 1 + queue.length) % queue.length == head;
     }
 
     private int getIndex(int index) {
-        return index % length();
+        return index % queue.length;
     }
 }

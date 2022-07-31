@@ -1,6 +1,5 @@
 package com.app.tools.datastruct.datamodule;
 
-import com.app.tools.datastruct.exception.EdgeException;
 import com.app.tools.datastruct.datamodule.graph.AbstractGraph;
 import com.app.tools.datastruct.datamodule.graph.Edge;
 import lombok.Getter;
@@ -56,19 +55,19 @@ public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
     /**
      * 添加边，如果边已经存储在则修改权值
      *
-     * @param vertex 顶点1所在数组下标
-     * @param anotherVertex 顶点2所在数组下标
+     * @param from 边的起点
+     * @param to 边的终点
      * @param weight 权重
      */
     @Override
-    public void addEdge(int vertex, int anotherVertex, W weight) {
-        if (isAdjaceted(vertex, anotherVertex)) {
-            setWeight(vertex, anotherVertex, weight);
+    public void addEdge(int from, int to, W weight) {
+        if (isAdjaceted(from, to)) {
+            setWeight(from, to, weight);
             return;
         }
-        edges[vertex][anotherVertex] = new Edge<>(vertex, anotherVertex, weight);
+        edges[from][to] = new Edge<>(from, to, weight);
         if (!isDigraph()) {
-            edges[anotherVertex][vertex] = new Edge<>(anotherVertex, vertex, weight);
+            edges[to][from] = new Edge<>(to, from, weight);
         }
         edgeTotal++;
     }
@@ -76,14 +75,14 @@ public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
     /**
      * 移除边
      *
-     * @param vertex 顶点1所在数组下标
-     * @param anotherVertex 顶点2所在数组下标
+     * @param from 边的起点
+     * @param to 边的终点
      */
     @Override
-    public void removeEdge(int vertex, int anotherVertex) {
-        edges[vertex][anotherVertex] = null;
+    public void removeEdge(int from, int to) {
+        edges[from][to] = null;
         if (!isDigraph()) {
-            edges[anotherVertex][vertex] = null;
+            edges[to][from] = null;
         }
         edgeTotal--;
     }
@@ -110,46 +109,46 @@ public class MatrixGraph<T, W> extends AbstractGraph<T, W> {
     }
 
     /**
-     * 获取两顶点间的权重
+     * 获取两顶点间的权重，若边不存在则返回 {@code null}
      *
-     * @param vertex 顶点下标1
-     * @param anotherVertex 顶点下标2
-     * @return 顶点间的权值
+     * @param from 边的起点
+     * @param to 边的终点
+     * @return 边的权值
      */
     @Override
     @SuppressWarnings("unchecked")
-    public W getWeight(int vertex, int anotherVertex) {
-        if (isAdjaceted(vertex, anotherVertex)) {
-            return  ((Edge<W>) edges[vertex][anotherVertex]).getWeight();
+    public W getWeight(int from, int to) {
+        if (isAdjaceted(from, to)) {
+            return  ((Edge<W>) edges[from][to]).getWeight();
         }
-        throw new EdgeException("edge: " + "<" + vertex + ", " + anotherVertex +">" + "is nonexistent");
+        return null;
     }
 
     /**
      * 设置权重
      *
-     * @param vertex 顶点下标1
-     * @param anotherVertex 顶点下标2
+     * @param from 边的起点
+     * @param to 边的终点
      * @param weight 权重
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void setWeight(int vertex, int anotherVertex, W weight) {
-        if (isAdjaceted(vertex, anotherVertex)) {
-            ((Edge<W>) edges[vertex][anotherVertex]).setWeight(weight);
+    public void setWeight(int from, int to, W weight) {
+        if (isAdjaceted(from, to)) {
+            ((Edge<W>) edges[from][to]).setWeight(weight);
             if (!isDigraph()) {
-                ((Edge<W>) edges[anotherVertex][vertex]).setWeight(weight);
+                ((Edge<W>) edges[to][from]).setWeight(weight);
             }
         } else {
             // 添加边，边++
-            addEdge(vertex, anotherVertex, weight);
+            addEdge(from, to, weight);
         }
 
     }
 
     @Override
-    public boolean isAdjaceted(int vertex, int anotherVertex) {
-        return edges[vertex][anotherVertex] != null;
+    public boolean isAdjaceted(int from, int to) {
+        return edges[from][to] != null;
     }
 
     /**

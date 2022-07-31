@@ -3,7 +3,7 @@ package com.app.tools.datastruct.helper;
 
 import com.app.tools.datastruct.datamodule.MatrixGraph;
 import com.app.tools.datastruct.datamodule.graph.Edge;
-import com.app.tools.datastruct.utils.HeapSortUtil;
+import com.app.tools.datastruct.utils.SortUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -150,7 +150,7 @@ public class GraphHelper {
 
     public static <T, W> MatrixGraph<T, W> findMstByKrusalCase(MatrixGraph<T, W> matrixGraph, int begin) {
         W[] weightOfEdge = getEdges(matrixGraph);
-        HeapSortUtil.heapSort(weightOfEdge, matrixGraph.getWeightComparator());
+        SortUtils.heapSort(weightOfEdge, matrixGraph.getWeightComparator());
 
         return null;
     }

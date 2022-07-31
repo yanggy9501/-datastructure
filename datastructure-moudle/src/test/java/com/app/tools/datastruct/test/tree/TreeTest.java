@@ -39,4 +39,8 @@ public class TreeTest {
 
         System.out.println(tree);
     }
+
+    @Test
+    public void test2() {
+    }
 }

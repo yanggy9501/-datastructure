@@ -32,29 +32,37 @@ public class BinarySortTree<T> extends BinaryTree<T> {
      * @param data 数据
      */
    public void add(T data) {
-       BinaryTreeNode<T> node = new BinaryTreeNode<>(data);
-       // 遍历指针
-       BinaryTreeNode<T> currentNode = getRoot();
-       if (currentNode == null) {
-           setRoot(node);
-           return;
-       }
-       // currentNode 的前驱
-       BinaryTreeNode<T> preNode = null;
-       // 找 node 的位置，preNode保存前驱
-       while (currentNode != null) {
-           preNode = currentNode;
-           // 小于等于走左边，否则右边
-           currentNode = comparator.compare(data, currentNode.getData()) <= 0 ?
-               currentNode.getLeftNode() : currentNode.getRightNode();
-       }
-       // 添加node到叶子节点
-       if (comparator.compare(data, preNode.getData()) <= 0) {
-           preNode.setLeftNode(node);
-       } else {
-           preNode.setRightNode(node);
-       }
+       add(new BinaryTreeNode<>(data));
    }
+
+    /**
+     * 添加节点二叉排序数中
+     *
+     * @param node 待添加节点
+     */
+    public void add(BinaryTreeNode<T> node) {
+        // 遍历指针
+        BinaryTreeNode<T> currentNode = getRoot();
+        if (currentNode == null) {
+            setRoot(node);
+            return;
+        }
+        // currentNode 的前驱
+        BinaryTreeNode<T> preNode = null;
+        // 找 node 的位置，preNode保存前驱
+        while (currentNode != null) {
+            preNode = currentNode;
+            // 小于等于走左边，否则右边
+            currentNode = comparator.compare(node.getData(), currentNode.getData()) <= 0 ?
+                currentNode.getLeftNode() : currentNode.getRightNode();
+        }
+        // 添加node到叶子节点
+        if (comparator.compare(node.getData(), preNode.getData()) <= 0) {
+            preNode.setLeftNode(node);
+        } else {
+            preNode.setRightNode(node);
+        }
+    }
 
 
     /**
@@ -200,9 +208,9 @@ public class BinarySortTree<T> extends BinaryTree<T> {
     }
 
     /**
-     * 查找 targetNode 节点的父节点
+     * 查找 targetNode 节点的父节点，如果{@code targetNode} 不是该树的节点则返回null
      *
-     * @param targetNode targetNode必须尾BinarySortTree中的节点
+     * @param targetNode BinaryTreeNode
      * @return BinaryTreeNode<T>
      */
     public BinaryTreeNode<T> findParent(BinaryTreeNode<T> targetNode) {
@@ -223,7 +231,7 @@ public class BinarySortTree<T> extends BinaryTree<T> {
     }
 
     /**
-     * 查找 targetValue == node.getData 节点的父节点
+     * 通过比较器，查找节点的父节点
      *
      * @param targetValue 目标节点的值
      * @return BinaryTreeNode<T>

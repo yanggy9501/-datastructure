@@ -5,13 +5,12 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * Tree节点
- * 树的孩子表示法描述节点
+ * 树的孩子表示法
  *
  * @author yanggy
  */
 @Data
-public class TreeNode<T>{
+public class TreeNode<T> {
     public TreeNode() {
 
     }

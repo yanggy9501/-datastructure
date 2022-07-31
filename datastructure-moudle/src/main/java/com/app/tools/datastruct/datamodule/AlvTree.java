@@ -1,7 +1,8 @@
 package com.app.tools.datastruct.datamodule;
 
-import com.app.tools.datastruct.helper.BinaryTreeHelper;
+import com.app.tools.datastruct.constants.RotateTypeEnum;
 import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
+import com.app.tools.datastruct.helper.BinaryTreeHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,21 +11,32 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * ALV平衡二叉树
+ * ALV树
  *
  * @author yanggy
  */
-public class ALVTree<T> extends BinarySortTree<T> {
+public class AlvTree<T> extends BinarySortTree<T> {
 
-    public ALVTree(Comparator<T> comparator) {
+    public AlvTree(Comparator<T> comparator) {
         super(comparator);
     }
 
     @Override
     public void add(T data) {
         super.add(data);
-        // 调整，如果出现不平衡节点的话，否则不操作
         balanceIfNeeded(data);
+    }
+
+    @Override
+    public void add(BinaryTreeNode<T> node) {
+        super.add(node);
+        balanceIfNeeded(node.getData());
+    }
+
+    @Override
+    public void add(List<T> dataList) {
+        // 调用ALVTree#add 方法，而非父类的add方法
+        dataList.forEach(this::add);
     }
 
     @Override
@@ -161,14 +173,9 @@ public class ALVTree<T> extends BinarySortTree<T> {
         root.setLeftNode(root.getLeftNode().getLeftNode());
     }
 
-    /**
-     * 平衡二叉树节点旋转类型
-     */
-    public enum RotateTypeEnum {
-        LEFT_ROTATE,
-        RIGHT_ROTATE,
-        LEFT_RIGHT_ROTATE,
-        RIGHT_LEFT_ROTATE,
-        NULL
+    private void swapNodeData(BinaryTreeNode<T> aNodeA, BinaryTreeNode<T> bNode) {
+        T aData = aNodeA.getData();
+        aNodeA.setData(bNode.getData());
+        bNode.setData(aData);
     }
 }

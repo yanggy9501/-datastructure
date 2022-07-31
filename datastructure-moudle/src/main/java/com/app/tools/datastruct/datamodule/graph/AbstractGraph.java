@@ -49,19 +49,19 @@ public abstract class AbstractGraph<T, W> {
     /**
      * 添加边
      *
-     * @param vertex 顶点1所在数组下标
-     * @param anotherVertex 顶点2所在数组下标
+     * @param from 边的起点
+     * @param to 边的终点
      * @param weight 权重
      */
-    public abstract void addEdge(int vertex, int anotherVertex, W weight);
+    public abstract void addEdge(int from, int to, W weight);
 
     /**
      * 移除边
      *
-     * @param vertex 顶点1所在数组下标
-     * @param anotherVertex 顶点2所在数组下标
+     * @param from 边的起点
+     * @param to 边的终点
      */
-    public abstract void removeEdge(int vertex, int anotherVertex);
+    public abstract void removeEdge(int from, int to);
 
     /**
      * 获取顶点总数
@@ -81,29 +81,29 @@ public abstract class AbstractGraph<T, W> {
     /**
      * 获取两顶点间的权重
      *
-     * @param vertex 顶点下标1
-     * @param anotherVertex 顶点下标2
+     * @param from 边的起点
+     * @param to 边的终点
      * @return 顶点间的权值
      */
-    public abstract W getWeight(int vertex, int anotherVertex);
+    public abstract W getWeight(int from, int to);
 
     /**
      * 设置权重
      *
-     * @param vertex 顶点下标1
-     * @param anotherVertex 顶点下标2
+     * @param from 边的起点
+     * @param to 边的终点
      * @param weight 权重
      */
-    public abstract void setWeight(int vertex, int anotherVertex, W weight);
+    public abstract void setWeight(int from, int to, W weight);
 
     /**
      * 判断两个顶点是否邻接
      *
-     * @param vertex 顶点下标1
-     * @param anotherVertex 顶点下标2
+     * @param from 边的起点
+     * @param to 边的终点
      * @return boolean true则边存在，否则不存在
      */
-    public abstract boolean isAdjaceted(int vertex, int anotherVertex);
+    public abstract boolean isAdjaceted(int from, int to);
 
     /**
      * 获取顶点的第一条邻边的顶点下标，不存在则返回 -1

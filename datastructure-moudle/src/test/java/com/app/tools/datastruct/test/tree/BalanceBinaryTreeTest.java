@@ -1,6 +1,6 @@
 package com.app.tools.datastruct.test.tree;
 
-import com.app.tools.datastruct.datamodule.ALVTree;
+import com.app.tools.datastruct.datamodule.AlvTree;
 import com.app.tools.datastruct.datamodule.BinarySortTree;
 import com.app.tools.datastruct.datamodule.binarytree.BinaryTreeNode;
 import com.app.tools.datastruct.helper.BinaryTreeHelper;
@@ -20,8 +20,8 @@ public class BalanceBinaryTreeTest {
                      4
      */
 
-    private ALVTree<Integer> createBalancedBinarySortTree() {
-        ALVTree<Integer> ALVBinaryTree = new ALVTree<>(Integer::compare);
+    private AlvTree<Integer> createBalancedBinarySortTree() {
+        AlvTree<Integer> ALVBinaryTree = new AlvTree<>(Integer::compare);
         ALVBinaryTree.add(6);
         ALVBinaryTree.add(1);
         ALVBinaryTree.add(3);
@@ -63,7 +63,7 @@ public class BalanceBinaryTreeTest {
 
     @Test
     public void testCreatBinarySortTree() {
-        ALVTree<Integer> ALVBinaryTree = createBalancedBinarySortTree();
+        AlvTree<Integer> ALVBinaryTree = createBalancedBinarySortTree();
         BinaryTreeNode<Integer> node = ALVBinaryTree.search(1);
         int treeHeight = BinaryTreeHelper.getHeight(node);
         System.out.println(treeHeight);
@@ -85,8 +85,8 @@ public class BalanceBinaryTreeTest {
                                        \
      */
 
-    private ALVTree<Integer> createLeftRotateBalancedBinaryTree() {
-        ALVTree<Integer> ALVBinaryTree = new ALVTree<>(Integer::compare);
+    private AlvTree<Integer> createLeftRotateBalancedBinaryTree() {
+        AlvTree<Integer> ALVBinaryTree = new AlvTree<>(Integer::compare);
         ALVBinaryTree.add(6);
         ALVBinaryTree.add(10);
         ALVBinaryTree.add(11);
@@ -97,7 +97,7 @@ public class BalanceBinaryTreeTest {
     
     @Test
     public void testLeftRotate() {
-        ALVTree<Integer> ALVBinaryTree = createLeftRotateBalancedBinaryTree();
+        AlvTree<Integer> ALVBinaryTree = createLeftRotateBalancedBinaryTree();
         System.out.println(ALVBinaryTree.getRoot());
     }
 
@@ -110,8 +110,8 @@ public class BalanceBinaryTreeTest {
 
      */
 
-    private ALVTree<Integer> createRightRotateBalancedBinaryTree() {
-        ALVTree<Integer> ALVBinaryTree = new ALVTree<>(Integer::compare);
+    private AlvTree<Integer> createRightRotateBalancedBinaryTree() {
+        AlvTree<Integer> ALVBinaryTree = new AlvTree<>(Integer::compare);
         ALVBinaryTree.add(6);
         ALVBinaryTree.add(5);
         ALVBinaryTree.add(4);
@@ -123,8 +123,9 @@ public class BalanceBinaryTreeTest {
 
     @Test
     public void testRightRotate() {
-        ALVTree<Integer> ALVBinaryTree = createRightRotateBalancedBinaryTree();
+        AlvTree<Integer> ALVBinaryTree = createRightRotateBalancedBinaryTree();
         System.out.println(ALVBinaryTree.getRoot());
+        System.out.println(BinaryTreeHelper.isBalance(ALVBinaryTree));
     }
 
     /*
@@ -134,11 +135,11 @@ public class BalanceBinaryTreeTest {
                     /                                       /   \                      /   \                   /      /    \
                                                           -5     8                    5     9               -5       9      20
                                                                    \                 /                                       \
-                                                                                   -5                                          30
+                                                                    9              -5                                          30
      */
 
-    private ALVTree<Integer> createBalancedBinaryTree() {
-        ALVTree<Integer> ALVBinaryTree = new ALVTree<>(Integer::compare);
+    private AlvTree<Integer> createBalancedBinaryTree() {
+        AlvTree<Integer> ALVBinaryTree = new AlvTree<>(Integer::compare);
         ALVBinaryTree.add(20);
         ALVBinaryTree.add(10);
         ALVBinaryTree.add(5);
@@ -155,26 +156,23 @@ public class BalanceBinaryTreeTest {
 
     @Test
     public void testRotate() {
-        ALVTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
+        AlvTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
         System.out.println("------------");
+        System.out.println(BinaryTreeHelper.isBalance(ALVBinaryTree));
         ALVBinaryTree.infixOrder(System.out::println);
     }
 
     @Test
     public void testDel() {
-        ALVTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
+        AlvTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
         ALVBinaryTree.delete(8);
         System.out.println(BinaryTreeHelper.isBalance(ALVBinaryTree));
         ALVBinaryTree.infixOrder(System.out::println);
-
-//        ALVBinaryTree.remove(node -> node.getData().equals(10));
-//        System.out.println(BinaryTreeHelper.isBalance(ALVBinaryTree));
-//        ALVBinaryTree.infixOrder(System.out::println);
     }
 
     @Test
     public void testRm() {
-        ALVTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
+        AlvTree<Integer> ALVBinaryTree = createBalancedBinaryTree();
 
         ALVBinaryTree.remove(node -> node.getData().equals(10));
         System.out.println(BinaryTreeHelper.isBalance(ALVBinaryTree));

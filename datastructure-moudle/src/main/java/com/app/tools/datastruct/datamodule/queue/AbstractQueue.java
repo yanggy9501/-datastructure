@@ -29,7 +29,7 @@ public abstract class AbstractQueue<T> {
     public abstract T getHead();
 
     /**
-     * 获取队列长度
+     * 获取队列长度，即返回队列中有多少个元素长度
      *
      * @return int 队列的长度
      */

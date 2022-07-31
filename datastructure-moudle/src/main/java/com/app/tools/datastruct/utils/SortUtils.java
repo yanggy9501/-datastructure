@@ -3,11 +3,11 @@ package com.app.tools.datastruct.utils;
 import java.util.Comparator;
 
 /**
- * 堆排序工具类
+ * 排序工具类
  *
  * @author yanggy
  */
-public class HeapSortUtil {
+public class SortUtils {
     /**
      * 升序排序
      *
